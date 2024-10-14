@@ -31,6 +31,8 @@ class ParentBlot extends ShadowBlot implements Parent {
   public domNode!: HTMLElement;
   public uiNode: HTMLElement | null = null;
 
+  private composing: boolean = false;
+
   constructor(scroll: Root, domNode: Node) {
     super(scroll, domNode);
     this.build();
@@ -219,8 +221,9 @@ class ParentBlot extends ShadowBlot implements Parent {
       refDomNode = refBlot.domNode;
     }
     if (
-      this.domNode.parentNode !== childBlot.domNode ||
-      this.domNode.nextSibling !== refDomNode
+      (this.domNode.parentNode !== childBlot.domNode ||
+      this.domNode.nextSibling !== refDomNode) &&
+      !this.composing
     ) {
       this.domNode.insertBefore(childBlot.domNode, refDomNode);
     }
@@ -323,7 +326,7 @@ class ParentBlot extends ShadowBlot implements Parent {
 
   public update(
     mutations: MutationRecord[],
-    _context: { [key: string]: any },
+    context: { [key: string]: any },
   ): void {
     const addedNodes: Node[] = [];
     const removedNodes: Node[] = [];
@@ -376,6 +379,9 @@ class ParentBlot extends ShadowBlot implements Parent {
           refBlot = this.scroll.find(node.nextSibling);
         }
         const blot = makeAttachedBlot(node, this.scroll);
+        if (context.composing) {
+          this.composing = !!context.composing;
+        }
         if (blot.next !== refBlot || blot.next == null) {
           if (blot.parent != null) {
             blot.parent.removeChild(this);
