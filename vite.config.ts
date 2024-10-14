@@ -8,6 +8,7 @@ export default defineConfig({
       name: 'Parchment',
       entry: './src/parchment.ts',
       formats: ['es', 'umd'],
+      fileName: (format) => `parchment.${format}.js`,
     },
     sourcemap: true,
   },
