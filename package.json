@@ -1,8 +1,11 @@
 {
-  "name": "parchment",
+  "name": "parchment-next",
   "version": "3.0.0",
   "description": "A document model for rich text editors",
-  "author": "Jason Chen <jhchen7@gmail.com>",
+  "author": "Vincent Chan <okcdz@diverse.space>",
+  "contributors": [
+    "Jason Chen <jhchen7@gmail.com>"
+  ],
   "homepage": "http://quilljs.com/docs/parchment",
   "main": "./dist/parchment.js",
   "types": "./dist/parchment.d.ts",
@@ -36,7 +39,10 @@
     "singleQuote": true
   },
   "license": "BSD-3-Clause",
-  "repository": "github:quilljs/parchment",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vincentdchan/parchment-next.git"
+  },
   "scripts": {
     "build": "npm run build:bundle && npm run build:types",
     "build:bundle": "vite build",
@@ -48,6 +54,6 @@
     "test:pkg": "attw $(npm pack)"
   },
   "bugs": {
-    "url": "https://github.com/quilljs/parchment/issues"
+    "url": "https://github.com/vincentdchan/parchment-next/issues"
   }
 }
